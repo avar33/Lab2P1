@@ -10,7 +10,8 @@ public class AndCriteria implements Criteria {
     public List<Product> meetCriteria(List<Product> items){
         List<Product> result = new ArrayList<Product>(items); // copy of items
         for (Criteria criteria : criterias) {
-            result = criteria.meetCriteria(result);
+            result = criteria.meetCriteria(result); //result list gets replaced with results from that criteria
+            // this ensures that only the items that meet ALL categories are in list
         }
         return result;
     }

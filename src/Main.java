@@ -122,7 +122,7 @@ public class Main {
         //two filters
         priceRange = new PriceRange(0.00, 10.00);
         ratings = new Ratings(4.0, 5.0);
-        List<Criteria> criterias = new ArrayList<>();
+        List<Criteria> criterias = new ArrayList<>(); // list of crtiterias to be met
         criterias.add(priceRange);
         criterias.add(ratings);
         AndCriteria restrictions = new AndCriteria(criterias);
@@ -140,5 +140,19 @@ public class Main {
         criteriaItems.clear();
         System.out.println();
         //three filters
+        cat = new Category("Home");
+        criterias.add(cat);
+        restrictions = new AndCriteria(criterias);
+        criteriaItems = restrictions.meetCriteria(products);
+        System.out.println("Home Items under $10 with 4-5 stars:");
+        if (criteriaItems.size() == 0) {
+            System.out.println("No items found");
+        } else {
+            for (Product criteriaItem : criteriaItems) {
+                System.out.println(criteriaItem.getName() + " - $" + criteriaItem.getPrice()+ ", id: " + criteriaItem.getId()+
+                        ", brand: " + criteriaItem.getBrand()+ ", category: " + criteriaItem.getCategory()+ ", ratings: "
+                        + criteriaItem.getCustomerRating());
+            }
+        }
     }
 }
